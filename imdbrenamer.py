@@ -4,8 +4,6 @@
 TO DO:
 1. Add a File called imdbrating.txt in the root directory with all the imdb ratings 
 
-
-cant handle (N/A)
 '''
 import os
 import json
@@ -52,9 +50,10 @@ for dirName,subdirList,fileList in os.walk(rootDir):
 							print (details['title']+"("+data['Year']+")"+" ("+data['imdbRating']+") ."+details['container'])
 						else:
 							print (details['title']+" ("+data['imdbRating']+") ."+details['container'])
-						if(setForAll==False):
+						choice = "f"
+						if(setForAll==False and data['imdbRating'] != "N/A"):
 							choice = input("\n Yes Change It ! (Y/N) \n Change For ALL - I trust You (A)")
-						if(choice.lower()=='y' or choice.lower()=='a'or setForAll==True):
+						if((choice.lower()=='y' or choice.lower()=='a'or setForAll==True )and data['imdbRating'] != "N/A"):
 							if(choice.lower()=="a"):
 								setForAll=True
 							path = os.path.join(dirName,fname)
