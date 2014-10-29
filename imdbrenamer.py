@@ -1,8 +1,7 @@
 '''
 					::IMDB RATING FILE RENAMER::
 							@achute  
-TO DO:
-1. Add a File called imdbrating.txt in the root directory with all the imdb ratings 
+
 
 '''
 import os
@@ -15,6 +14,7 @@ print (str(sys.argv[1]))
 if len(sys.argv) <=1:
 	sys.exit()
 rootDir=str(sys.argv[1])
+imdbtxt=open(rootDir+"\\imdbrating.txt","a")
 trueforall=False
 setForAll=False
 movies_extension=["avi","mp4","mkv","mov"]
@@ -55,9 +55,10 @@ for dirName,subdirList,fileList in os.walk(rootDir):
 							choice = input("\n Yes Change It ! (Y/N) \n Change For ALL - I trust You (A)")
 						if((choice.lower()=='y' or choice.lower()=='a'or setForAll==True )and data['imdbRating'] != "N/A"):
 							if(choice.lower()=="a"):
-								setForAll=True
+								setForAll=True	
+							imdbtxt.write(data['imdbRating']+"\t"+details['title']+"\n")
 							path = os.path.join(dirName,fname)
 							path2 = os.path.join(dirName,details['title']+" ("+data['imdbRating']+") ."+details['container'])
 							os.rename(path,path2)
 
-#details = guess_file_info(fname)
+imdbtxt.close()
